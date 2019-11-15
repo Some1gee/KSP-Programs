@@ -9,7 +9,7 @@
 import math 
 M0 = float(input("Wet Mass of the Rocket in Tons: "))
 M1 = float(input("Mass of the Rocket at the staging event in Tons: "))
-dVreq = float(input("How much DeltaV do ISP do you want this stage to have: "))
+dVreq = float(input("How much DeltaV do you want this stage to have: "))
 M01 = M0*1000 #Convert to Kg
 M11 = M1*1000 #Convert to Kg
 #Name, Isp, Thrust in Kn
@@ -27,10 +27,11 @@ def sL(M0, M1, dVreq, M01, M11):
     WeightT = i[3]
     WeightkG = i[3] * 1000
     twr = ThrustkN1/((M0+(WeightT))*9.81)
-    while twr < 1.2: #Should figure out how many engines needed to get a 1.2 TWR
-        engineCount = int(1.2/twr) #ints will round down until 0.99999999999 (11 9s)
-        twr = twr*engineCount #applying the change to TWR
-        break
+    if twr < 1.2:
+        while twr < 1.2: #Should figure out how many engines needed to get a 1.2 TWR
+            engineCount = int(1.2/twr) #ints will round down until 0.99999999999 (11 9s)
+            twr = twr*engineCount #applying the change to TWR
+            break
     dV = ((ISP1*9.807)*math.log(((M01+(engineCount*WeightkG)))/(M11+(engineCount*WeightkG)), math.e))
     #dV = ISP*Gravitational Constant * ln(Wet Mass+Engine Weight/Dry Mass + Engine Weight)
     sLDv.append((engineCount, Name1, "DeltaV: ", dV, "TWR: ", twr))
