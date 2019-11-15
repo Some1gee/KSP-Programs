@@ -30,7 +30,7 @@ def sL(M0, M1, o):
     while twr < 1.2: #Should figure out how many engines needed to get a 1.2 TWR
         q = int(1.2/twr)#+1 #Ints will round down until 0.99999999999 (11 9s)
         twr = twr*q #applying the change to TWR
-    dV = ((y*9.807)*math.log(((M0+(q*aaa)))/(M1+(q*aaa)), math.e))
+    dV = ((y*9.807)*math.log(((M01+(q*aaa)))/(M11+(q*aaa)), math.e))
     #dV = ISP*Gravitational Constant * nl(Wet Mass+Engine Weight/Dry Mass + Engine Weight)
     sLDv.append((q, x, "DeltaV: ", dV, "TWR: ", twr))
   print("Possible Engines: ")
