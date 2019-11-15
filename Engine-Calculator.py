@@ -31,7 +31,7 @@ def sL(M0, M1, o):
       q = int(1.2/twr)+1 #Ints will round down until 0.99999999999 (11 9s)
       twr = twr*q #applying the change to TWR
     dV = ((y*9.807)*math.log(((M0+(q*aa)))/(M1+(q*aa)), math.e))
-    #dV = ISP*Gravitation Constant * nl(Wet Mass+Engine Weight/Dry Mass + Engine Weight)
+    #dV = ISP*Gravitational Constant * nl(Wet Mass+Engine Weight/Dry Mass + Engine Weight)
     sLDv.append((q, x, "DeltaV: ", dV, "TWR: ", twr))
   print("Possible Engines: ")
   GoodSL = []
