@@ -10,12 +10,12 @@ import math
 M0 = float(input("Wet Mass of the Rocket in Tons: "))
 M1 = float(input("Mass of the Rocket at the staging event in Tons: "))
 o = float(input("How much DeltaV do you want this stage to have: "))
-M0 = M0*1000 #Convert to Kg
-M1 = M1*1000 #Convert to Kg
+M01 = M0*1000 #Convert to Kg
+M11 = M1*1000 #Convert to Kg
 #Name, Isp, Thrust in Kn
 def sL(M0, M1, o):
   #List of Sea Level Engine Stats
-  sLEngines = [("Spider", 260, 1.79, 0.02), ("Twitch", 275, 15, 0.08),("Thud", 275, 108.20, 0.9), ("Puff", 120, 9.60, 0.09), ("Ant", 80, 0.51, 0.02), ("Spark", 265, 16.56, 0.13), ("Terrier",85, 14.78, 0.50), ("Reliant",265,205.16, 1.25), ("Swivel", 250,167.97, 1.5), ("Vector", 295, 936.51, 4), ("Dart", 290, 153.53, 1), ("Nerv", 185, 13.88, 3), ("Poodle", 90, 64.29, 1.75), ("Skipper", 280, 568.75, 3), ("Mainsail", 285, 1379.03, 6), ("Twin Boar", 280, 1866.67, 10.5), ("Rhino", 205, 1205.88, 9), ("Mammoth",295, 3746.03, 15), ("Rapier", 275, 162.30, 2)]
+  sLEngines = [("Spider", 260, 1.79, 0.02), ("Twitch", 275, 15, 0.08),("Thud", 275, 108.20, 0.9), ("Puff", 120, 9.60, 0.09), ("Ant", 80, 0.51, 0.02), ("Spark", 265, 16.56, 0.13), ("Terrier",85, 14.78, 0.50), ("Reliant",265,205.16, 1.25), ("Swivel", 250,167.97, 1.5), ("Vector", 295, 936.51, 4), ("Dart", 290, 153.53, 1), ("Nerv", 185, 13.88, 3), ("Poodle", 90, 64.29, 1.75), ("Skipper", 280, 568.75, 3), ("Mainsail", 285, 1379.03, 6), ("Twin Boar", 280, 1866.67, 10.5), ("Rhino", 205, 1205.88, 9), ("Mammoth",295, 3746.03, 15), ("Rapier", 275, 162.295, 2)]
   sLDv = []
   TWRsL = []
   q = 1
@@ -24,13 +24,13 @@ def sL(M0, M1, o):
     x = i[0]
     y = i[1]
     z = i[2]
-    aa = i[3] * 1000
-    Kgt = z*101.9716005 #Converts Kilonewtons of thrust to Kilograms
-    twr = Kgt/M0 
+    aa = i[3]
+    aaa = i[3] * 1000
+    twr = z/((M0+(aa))*9.81)
     while twr < 1.2: #Should figure out how many engines needed to get a 1.2 TWR
-      q = int(1.2/twr)+1 #Ints will round down until 0.99999999999 (11 9s)
-      twr = twr*q #applying the change to TWR
-    dV = ((y*9.807)*math.log(((M0+(q*aa)))/(M1+(q*aa)), math.e))
+        q = int(1.2/twr)#+1 #Ints will round down until 0.99999999999 (11 9s)
+        twr = twr*q #applying the change to TWR
+    dV = ((y*9.807)*math.log(((M0+(q*aaa)))/(M1+(q*aaa)), math.e))
     #dV = ISP*Gravitational Constant * nl(Wet Mass+Engine Weight/Dry Mass + Engine Weight)
     sLDv.append((q, x, "DeltaV: ", dV, "TWR: ", twr))
   print("Possible Engines: ")
