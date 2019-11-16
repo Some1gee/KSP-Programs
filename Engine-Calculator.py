@@ -29,9 +29,9 @@ def engineCalc(M0, M1, dVreq, M01, M11, constOfGrav, vac):
       ThrustkN1 = i[2]
       WeightT = i[3]
       WeightkG = i[3] * 1000
-      twr = ThrustkN1/((M0+(WeightT))*constOfGrav)
-      engineCount = int(1.2/twr)+1 #ints will round down until 0.99999999999 (11 9s)
-      twr = round(twr*engineCount, 2) #applying the change to TWR
+      twr = ThrustkN1/((M0+(WeightT))*constOfGrav)#Original TWR Calc
+      engineCount = int((1.35/twr)+1) #ints will round down until 0.99999999999 (11 9s)
+      twr = round((ThrustkN1*engineCount)/((M0+(WeightT*engineCount))*constOfGrav), 2)#Second TWR Calc
       dV = round(((ISP1*constOfGrav)*math.log(((M01+(engineCount*WeightkG)))/(M11+(engineCount*WeightkG)), math.e)))
       #dV = ISP*Gravitational Constant * ln(Wet Mass+Engine Weight/Dry Mass + Engine Weight)
       sLDv.append((engineCount, Name1, "DeltaV: ", dV, "TWR: ", twr))
