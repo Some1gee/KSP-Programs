@@ -41,6 +41,7 @@ def engineCalc(M0, M1, dVreq, M01, M11, constOfGrav, vac, maxEngineCount, reqVec
       dV = round(((ISP1*constOfGrav)*math.log(((M01+(engineCount*WeightkG)))/(M11+(engineCount*WeightkG)), math.e)))
       #dV = ISP*Gravitational Constant * ln(Wet Mass+Engine Weight/Dry Mass + Engine Weight)
       sLDv.append((engineCount, Name1, "DeltaV: ", dV, "TWR: ", twr, "Vector Range: ", vectorRange1, "Radial True/False:", radialTF))
+      #Add it to Sea level Delta V List (Name was created before it's final purpose was)
     print("Possible Engines: ")
     GoodSL = []
     for i in sLDv: #Searches  from the new list
@@ -50,11 +51,11 @@ def engineCalc(M0, M1, dVreq, M01, M11, constOfGrav, vac, maxEngineCount, reqVec
       twrF = round(i[5], 1) #TWR
       vectorRange2 = i[7]
       radialTF2 = i[9]
-      if radialTF2 == 0:
-        radialTF2 = True
+      if radialTF2 == 0: #Changing radialTF2 from Binary to Boolean
+        radialTF2 = True 
       else:
         radialTF2 = False
-      if engAmount <= maxEngineCount and dV >= dVreq and 1.2 <= twrF and vectorRange2 >= reqVecRange and radialTF2 == radialAsk:
+      if engAmount <= maxEngineCount and dV >= dVreq and 1.2 <= twrF and vectorRange2 >= reqVecRange and radialTF2 == radialAsk: 
         GoodSL.append(("Engine Name: ", engName, "Engine Count: ", engAmount, "DeltaV: ", dV, "TWR: ", twrF, "Vector Range: ", vectorRange2)) #New List of Actual possible engines
     print(GoodSL)
     print(" ")#Space
@@ -116,7 +117,7 @@ elif constOfGrav == "Eeloo":
 elif constOfGrav == "Jool" or "Laythe":
   constOfGrav = 7.85
   vac = False
-else:
+else:#This currently doesn't work
   print("Try Again")
   constOfGrav = str(input("Name of Celestial Body in which you are in: (Kerbol, Moho, Eve, Gilly, Kerbin, Mun, Minmus, Duna, Ike, Dres, Jool, Laythe, Vall, Tylo, Bop, Pol, Eeloo) "))
 engineCalc(M0, M1, dVreq, M01, M11, constOfGrav, vac, maxEngineCount, reqVecRange, radialAsk) #calling function
