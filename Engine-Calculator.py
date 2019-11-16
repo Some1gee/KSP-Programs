@@ -63,7 +63,7 @@ def engineCalc(M0, M1, dVreq, M01, M11, constOfGrav, vac, maxEngineCount, reqVec
         radialTF2 = "No"
       else: #Engine is not radial and Radial Ask is not radial
         radialTF2 = "False"
-      if engAmount <= maxEngineCount and dV >= dVreq and 1.2 <= twrF and vectorRange2 >= reqVecRange and radialTF2 != radialAsk: 
+      if engAmount <= maxEngineCount and dV >= dVreq and 1.2 <= twrF and vectorRange2 >= reqVecRange and radialTF2 == radialAsk: 
         GoodSL.append(("Engine Name: ", engName, "Engine Count: ", engAmount, "DeltaV: ", dV, "TWR: ", twrF, "Vector Range: ", vectorRange2)) #New List of Actual possible engines
     print(GoodSL)
     print(" ")#Space
