@@ -12,7 +12,7 @@ M1 = float(input("Mass of the Rocket at the staging event in Tons: "))
 dVreq = float(input("How much DeltaV do you want this stage to have: "))
 constOfGrav = str(input("Name of Celestial Body in which you are in: (Kerbol, Moho, Eve, Gilly, Kerbin, Mun, Minmus, Duna, Ike, Dres, Jool, Laythe, Vall, Tylo, Bop, Pol, Eeloo) "))
 vac = 0
-maxEngineCount = int(input("Maximum acceptable number engines: "))
+maxEngineCount = int(input("Maximum acceptable number of engines: "))
 reqVecRange = float(input("What is the Minimum Required Vector Range (0 and above): "))
 M01 = M0*1000 #Convert to Kg
 M11 = M1*1000 #Convert to Kg
@@ -46,8 +46,8 @@ def engineCalc(M0, M1, dVreq, M01, M11, constOfGrav, vac, maxEngineCount, reqVec
       dV = int(i[3]) #dV
       twrF = round(i[5], 1) #TWR
       vectorRange2 = i[7]
-      if engAmount <= maxEngineCount and dV >= dVreq and 1.2 <= twrF and vectorRange2 >= reqVecRange :
-        GoodSL.append(("Engine Name: ", engName, "Engine Count: ", engAmount, "DeltaV: ", dV, "TWR: ", twrF)) #New List of Actual possible engines
+      if engAmount <= maxEngineCount and dV >= dVreq and 1.2 <= twrF and vectorRange2 >= reqVecRange:
+        GoodSL.append(("Engine Name: ", engName, "Engine Count: ", engAmount, "DeltaV: ", dV, "TWR: ", twrF, "Vector Range: ", vectorRange2)) #New List of Actual possible engines
     print(GoodSL)
     print(" ")#Space
     print(" ")
