@@ -17,7 +17,7 @@ reqVecRange = float(input("What is the Minimum Required Vector Range (0 and abov
 radialAsk = str(input("Are radial engines acceptable? Answer with 'True', 'False', or 'Only': "))
 sizeAsk = float(input("Maximum Possible Engine Size (m):"))
 M01 = M0*1000 #Convert to Kg
-M11 = M1*1000 #Convert to Kg
+M11 = M1*1000 #Convert to Kg 
 #Name, Isp, Thrust in Kn
 def engineCalc(M0, M1, dVreq, M01, M11, constOfGrav, vac, maxEngineCount, reqVecRange, radialAsk, sizeAsk):
   #List of Sea Level Engine Stats
