@@ -16,6 +16,7 @@ maxEngineCount = int(input("Maximum acceptable number of engines: "))
 reqVecRange = float(input("What is the Minimum Required Vector Range (0 and above): "))
 radialAsk = str(input("Are radial engines acceptable? Answer with 'True', 'False', or 'Only': "))
 sizeAsk = float(input("Maximum Possible Engine Size (m):"))
+srbAsk = str(input("Are SRBs acceptable? Answer with 'True', 'False', or 'Only': "))
 M01 = M0*1000 #Convert to Kg
 M11 = M1*1000 #Convert to Kg 
 #Name, Isp, Thrust in Kn
