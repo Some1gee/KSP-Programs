@@ -10,7 +10,6 @@ altitude = conn.add_stream(getattr, vessel.flight(), "mean_altitude")
 
 gravConst = float(vessel.orbit.body.surface_gravity)
 
-while int(altitude()) > 0:
 twr = round((float(vessel.available_thrust)*0.001)/((float(vessel.mass)*0.001)*gravConst), 2)
 print(twr)
 
@@ -26,4 +25,31 @@ finalVelocity = (int(vessel.speed)+int(acceleration))
 
 finalAltitude = 0
 
-equation = ((twr/gravConst)**2)-(2((vessel.speed**2)-(finalVelocity**2))/(4*(gravConst)*(altitude-finalAltitude)))*(twr/gravConst)-(1+(((2*(vessel.speed))*2)-((2*(finalVelocity))*2))/((4*gravConst)*(altitude-finalAltitude)))
+accelerationDueToThrust = (vessel.mass*gravConst)-vessel.available_thrust
+
+equation = ((accelerationDueToThrust/gravConst)**2)-(2((vessel.speed**2)-(finalVelocity**2))/(4*(gravConst)*(altitude-finalAltitude)))*(twr/gravConst)-(1+(((2*(vessel.speed))*2)-((2*(finalVelocity))*2))/((4*gravConst)*(altitude-finalAltitude)))
+
+thrustNeeded = (accelerationDueToThrust/gravConst)-vessel.mass                  
+
+#ax^2 + bx + c = 0
+
+a = 1
+b = -1*(2((vessel.speed**2)-(finalVelocity**2))/(4*(gravConst)*(altitude-finalAltitude)))
+c = -(1+((2*((vessel.speed**2)-(finalVelocity**2))))/((4*gravConst)*(altitude-finalAltitude)))
+x = accelerationDueToThrust/gravConst
+#(-b +- sqrt(b^2 - 4ac))/2a
+root1 = ((-1*b) + math.sqrt((b**2)-(4*a*c)))/(2*a)
+root2 = ((-1*b) - math.sqrt((b**2)-(4*a*c)))/(2*a)
+
+drag = vessel.flight.drag()
+
+if root1 > 0:
+    accelerationDueToThrust = root1
+else:
+    accelerationDueToThrust = root2
+
+desiredThrust = accelerationDueToThrust*gravConst*vessel.mass*drag
+
+if desiredThrust >= vessel.available_thrust:
+    vessel.control.throttle = 1
+
