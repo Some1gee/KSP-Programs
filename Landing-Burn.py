@@ -38,6 +38,11 @@ b = -1*(2((vessel.flight(srf_frame).speed**2)-(finalVelocity**2))/(4*(gravConst)
 c = -1*(1+((2*((vessel.flight(srf_frame).speed**2)-(finalVelocity**2))))/((4*gravConst)*(altitude-finalAltitude)))
 x = accelerationDueToThrust/gravConst
 #(-b +- sqrt(b^2 - 4ac))/2a
+#a = 1
+#b = (-vessel.flight(srf_frame).speed**2+finalVelocity**2)/((2*gravConst*altitude)+(2*gravConst*finalAltitude))
+#c = -1+b
+#x = x
+
 root1 = ((-1*b) + math.sqrt((b**2)-(4*a*c)))/(2*a)
 root2 = ((-1*b) - math.sqrt((b**2)-(4*a*c)))/(2*a)
 
@@ -54,4 +59,3 @@ desiredThrust = accelerationDueToThrust*gravConst*vessel.mass*drag
 
 if desiredThrust >= vessel.available_thrust:
     vessel.control.throttle = 1
-
